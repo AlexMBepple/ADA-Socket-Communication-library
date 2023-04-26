@@ -1,0 +1,97 @@
+version: '3'
+services:
+  controller:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../controller.adb && sleep 10 && ./controller"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.2
+    stdin_open: true
+    tty: true
+    container_name: controller
+
+  sensor1:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../tempsensor.adb && sleep 1 && ./tempsensor"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.3
+    stdin_open: true
+    tty: true
+    container_name: sensor1
+
+  sensor2:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../tempsensor.adb && sleep 3 && ./tempsensor"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.4
+    stdin_open: true
+    tty: true
+    container_name: sensor2
+
+  sensor3:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../pressuresensor.adb && sleep 4 && ./pressuresensor"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.5
+    stdin_open: true
+    tty: true
+    container_name: sensor3
+
+  alarm:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../alarm.adb && sleep 7 && ./alarm"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.7
+    stdin_open: true
+    tty: true
+    container_name: alarm
+
+  controller2:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../controller.adb && sleep 10 && ./controller"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.8
+    stdin_open: true
+    tty: true
+    container_name: controller2
+
+  controller3:
+    image: registry.ceng4320.tru.ca/geoffs-group/docker/ceng4320:adaBase
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: sh -c "cd ./build && gnatmake ../controller.adb && sleep 10 && ./controller"
+    networks:
+      DockNet:
+        ipv4_address: 173.19.0.9
+    stdin_open: true
+    tty: true
+    container_name: controller3
+
+networks:
+  DockNet:
+    external:
+      name: DockNet
